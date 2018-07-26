@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+import datetime
 
 
 class Enterprise(models.Model):
@@ -11,6 +12,7 @@ class Zone(models.Model):
     enterprise = models.ForeignKey(Enterprise, on_delete=models.CASCADE)
     name = models.CharField(max_length=20)
     letter = models.CharField(max_length=2)
+    quantity = models.IntegerField(default=1)
     info = models.CharField(max_length=100)
 
 
@@ -18,9 +20,9 @@ class Place(models.Model):
     zone = models.ForeignKey(Zone, on_delete=models.CASCADE)
     place_number = models.IntegerField(blank=True)
     description = models.CharField(max_length=30, blank=True)
-    car_number = models.CharField(max_length=9)
-    booking_created = models.DateTimeField(default=timezone.now)
-    booking_start = models.DateTimeField(default=timezone.now)
+    car_number = models.CharField(max_length=9, default=None)
+    booking_created = models.DateTimeField(blank=True)
+    booking_start = models.DateTimeField(blank=True)
     booking_duration = models.IntegerField(default=40)
     place_type = models.IntegerField(default=1)
     state = models.PositiveSmallIntegerField(default=1)
