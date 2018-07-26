@@ -24,9 +24,10 @@ class Place(models.Model):
     booking_created = models.DateTimeField(blank=True)
     booking_start = models.DateTimeField(blank=True)
     booking_duration = models.IntegerField(default=40)
-    place_type = models.IntegerField(default=1)
+    place_type = models.IntegerField(blank=True, null=True)
     state = models.PositiveSmallIntegerField(default=1)
     completed = models.BooleanField(default=False)
+    parent = models.IntegerField(blank=True, null=True)
     comment = models.CharField(max_length=200, blank=True)
 
     def __str__(self):
