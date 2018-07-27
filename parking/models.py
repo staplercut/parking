@@ -25,7 +25,7 @@ class Place(models.Model):
     booking_start = models.DateTimeField(blank=True)
     booking_duration = models.IntegerField(default=40)
     place_type = models.IntegerField(blank=True, null=True)
-    state = models.PositiveSmallIntegerField(default=1)
+    state = models.PositiveSmallIntegerField(default=0)
     completed = models.BooleanField(default=False)
     parent = models.IntegerField(blank=True, null=True)
     comment = models.CharField(max_length=200, blank=True)
@@ -34,10 +34,13 @@ class Place(models.Model):
         return "Zone:%s Place number:%s" % (self.zone.letter, self.place_number)
 
     def book(self):
-        self.state = 2 if self.state == 1 else 2
-        self.pk = None
+        # function placeholder
+        # booking logic here
         try:
             self.save()
+            success = True
         except Exception:
-            pass
+            success = False
+            # err logging, notifications etc
+        return True
 
